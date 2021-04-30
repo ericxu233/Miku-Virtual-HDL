@@ -6,7 +6,7 @@ class logicGate:
         self.gateType = typev
         self.gateName = name
         self.output = -1
-        self.next_gate = None
+        self.next_gate = " "
         self.input = []
 
 
