@@ -54,7 +54,7 @@ class norGate(logicGate):
         output = False
         for x in input:
             output = output or x
-        ouput = not ouput
+        output = not output
 
 
 class nandGate(logicGate):
@@ -66,5 +66,34 @@ class nandGate(logicGate):
         for x in input:
             output = output and x
         output = not output
+
+
+class xorGate(logicGate):
+    def __init__(self, typev, name):
+        logicGate.__init__(self, typev, name)
+
+    def compute_result():
+        output = False
+        counter = 0
+        for x in input:
+            if x == True:
+                counter += 1
+        if counter%2 == 1:
+            output = True
+
+
+class xnorGate(logicGate):
+    def __init__(self, typev, name):
+        logicGate.__init__(self, typev, name)
+    
+    def compute_result():
+        output = False
+        counter = 0
+        for x in input:
+            if x == False:
+                counter += 1
+        if counter%2 == 0:
+            output = True
+            
 
 
