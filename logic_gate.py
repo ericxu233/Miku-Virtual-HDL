@@ -6,7 +6,7 @@ class logicGate:
     def __init__(self, typev, name):
         self.gateType = typev
         self.gateName = name
-        self.output = -1
+        self.output = None
         self.next_gate = " "
         self.input = []
 
@@ -44,3 +44,27 @@ class notGate(logicGate):
 
     def compute_result():
         output = not input[0]
+
+
+class norGate(logicGate):
+    def __init__(self, typev, name):
+        logicGate.__init__(self, typev, name)
+
+    def compute_result():
+        output = False
+        for x in input:
+            output = output or x
+        ouput = not ouput
+
+
+class nandGate(logicGate):
+    def __init__(self, typev, name):
+        logicGate.__init__(self, typev, name)
+
+    def compute_result():
+        output = True
+        for x in input:
+            output = output and x
+        output = not output
+
+
