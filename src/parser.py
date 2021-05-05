@@ -10,6 +10,32 @@ from logic_gate import all_gates
 
 outputs = []
 
+
+def create_gate(command, identifier):
+    if command == "morr":
+        all_gates[identifier] = orGate(command[1:], ideentifier)
+    elif command == "mand":
+        all_gates[identifier] = andGate(command[1:], ideentifier)
+    elif command == "mnot":
+        all_gates[identifier] = notGate(command[1:], ideentifier)
+
+
+
 def parser():
-    a = 0
+    file = open("../user_scipt/circuit.txt", "r")
+    lines = file.readlines()
+
+    for x in lines:
+        x.replace("(", " ")
+        x.replace(",", " ")
+        x.replace(")", " ")
+        components.split()
+        #not done yet...
+
+            
+
+
+
+
+
 

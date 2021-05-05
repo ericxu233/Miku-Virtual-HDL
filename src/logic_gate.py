@@ -117,7 +117,7 @@ class xnorGate(logicGate):
             output = True
  
 #fuction that produces the circuite ouput with recusion
-def trac_output(gate_name):
+def trace_output(gate_name):
     gate = all_gates[gate_name]
 
     #first verify if logic gate is already complete
