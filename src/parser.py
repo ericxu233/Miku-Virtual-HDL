@@ -30,12 +30,18 @@ def create_gate(command, identifier):
         all_gates[identifier] = xorGate(command[1:], identifier)
     elif command == "mxnr":
         all_gates[identifier] = xnorGate(command[1:], identifier)
-    elif command == "output":
-        outputs.insert(len(outputs), identifier)
     else:
         result = False
 
     return result
+
+def insert_cg(all_signals, identifier):
+    for x in all_signals:
+        if x.isnumeric():
+            all_gates[identifier].add_input(int(x))
+        else:
+            all_gates[identifier].add_wire(x)
+
 
 def create_output(command, identifier):
     result = True
@@ -47,22 +53,41 @@ def create_output(command, identifier):
     
     return result
 
+def insert_co(identifier):
+    if identifier in all_gates:
+        if identifier not in outputs:
+            outputs.insert(len(outputs), identifier)
+    else:
+        message = "Error: " + identifier + " is not in your pool of logic gates"
+        sys.exit(message)
+
+
 
 def parser():
     file = open("../user_scipt/circuit.txt", "r")
     lines = file.readlines()
     counter = 0
 
+    #x represents an individual line
     for x in lines:
         x.replace("(", " ")
         x.replace(",", " ")
         x.replace(")", " ")
         components = x.split()
-        insertion_operation = create_gate(components[0], components[1])
 
-        #current problem: how to parse different types of commands eligently
+        #good to add some error control for users
+
+        insertion_operation = create_gate(components[0], components[1])
         if insertion_operation:
-            #...
+            insert_cg(x[2:], x[0])
+        
+        insertion_operation = create_output(components[0], components[1])
+        if insertion_operation:
+            insert_co(components[1])
+        
+        
+
+            
         
 
 
