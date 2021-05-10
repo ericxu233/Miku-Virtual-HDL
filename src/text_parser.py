@@ -74,12 +74,12 @@ def parser():
         x = x.replace(",", " ")
         x = x.replace(")", " ")
         components = x.split()
-        
+
         #good to add some error control for users
 
         insertion_operation = create_gate(components[0], components[1])
         if insertion_operation:
-            insert_cg(x[2:], components[0])
+            insert_cg(components[2:], components[1])
         
         insertion_operation = create_output(components[0], components[1])
         if insertion_operation:

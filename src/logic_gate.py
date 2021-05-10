@@ -17,21 +17,21 @@ class logicGate:
 
         all_gates[name] = self
     
-    def add_input(signal):
-        input.insert(len(input), signal)
+    def add_input(self, signal):
+        self.input.insert(len(self.input), signal)
     
-    def add_wire(wire):
-        connection_wires.insert(len(connection_wires), wire)
+    def add_wire(self, wire):
+        self.connection_wires.insert(len(self.connection_wires), wire)
 
     #verify if all wires have produced an output
-    def verify_complete():
-        complete = not connection_wires
+    def verify_complete(self):
+        complete = not self.connection_wires
         return complete
     
     #complete a wire connection, note: does not handle the inputed signal (will be handled by trace_output())
-    def wire_complete(wire):
-        connection_wires.remove(wire)
-        complete_connections.insert(len(complete_connections), wire)
+    def wire_complete(self, wire):
+        self.connection_wires.remove(wire)
+        self.complete_connections.insert(len(self.complete_connections), wire)
     
 
         
@@ -42,9 +42,9 @@ class orGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
 
-    def compute_result():
+    def compute_result(self):
         output = False
-        for x in input:
+        for x in self.input:
             output = output or x
 
 
@@ -53,9 +53,9 @@ class andGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
 
-    def compute_result():
+    def compute_result(self):
         output = True
-        for x in input:
+        for x in self.input:
             output = output and x
 
 
@@ -63,17 +63,17 @@ class notGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
 
-    def compute_result():
-        output = not input[0]
+    def compute_result(self):
+        output = not self.input[0]
 
 
 class norGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
 
-    def compute_result():
+    def compute_result(self):
         output = False
-        for x in input:
+        for x in self.input:
             output = output or x
         output = not output
 
@@ -82,9 +82,9 @@ class nandGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
 
-    def compute_result():
+    def compute_result(self):
         output = True
-        for x in input:
+        for x in self.input:
             output = output and x
         output = not output
 
@@ -93,10 +93,10 @@ class xorGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
 
-    def compute_result():
+    def compute_result(self):
         output = False
         counter = 0
-        for x in input:
+        for x in self.input:
             if x == 1:
                 counter += 1
         if counter%2 == 1:
@@ -107,10 +107,10 @@ class xnorGate(logicGate):
     def __init__(self, typev, name):
         logicGate.__init__(self, typev, name)
     
-    def compute_result():
+    def compute_result(self):
         output = False
         counter = 0
-        for x in input:
+        for x in self.input:
             if x == 0:
                 counter += 1
         if counter%2 == 0:
