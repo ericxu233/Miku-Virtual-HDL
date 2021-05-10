@@ -1,4 +1,4 @@
-all_gates = []
+all_gates = dict()
 
 
 #This is the file that contains the core objects for the representation of logic gates

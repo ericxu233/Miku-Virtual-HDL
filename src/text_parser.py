@@ -64,34 +64,30 @@ def insert_co(identifier):
 
 
 def parser():
-    file = open("../user_scipt/circuit.txt", "r")
+    file = open("user_script/circuit.txt", "r")
     lines = file.readlines()
     counter = 0
 
     #x represents an individual line
     for x in lines:
-        x.replace("(", " ")
-        x.replace(",", " ")
-        x.replace(")", " ")
+        x = x.replace("(", " ")
+        x = x.replace(",", " ")
+        x = x.replace(")", " ")
         components = x.split()
-
+        
         #good to add some error control for users
 
         insertion_operation = create_gate(components[0], components[1])
         if insertion_operation:
-            insert_cg(x[2:], x[0])
+            insert_cg(x[2:], components[0])
         
         insertion_operation = create_output(components[0], components[1])
         if insertion_operation:
             insert_co(components[1])
-        
-        
+    
 
-            
-        
-
-
-        #not done yet...
+        #more functionality will be supported in the future
+        #please add langugae features here
 
             
 
