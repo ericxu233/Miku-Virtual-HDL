@@ -1,3 +1,4 @@
+import sys
 all_gates = dict()
 
 
@@ -118,6 +119,8 @@ class xnorGate(logicGate):
  
 #fuction that produces the circuite ouput with recusion
 def trace_output(gate_name):
+    #print(gate_name)
+
     gate = all_gates[gate_name]
 
     #first verify if logic gate is already complete
