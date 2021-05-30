@@ -77,7 +77,6 @@ def parser():
         if not components:
             continue
         #good to add some error control for users
-        print(components)
         insertion_operation = create_gate(components[0], components[1])
         if insertion_operation:
             insert_cg(components[2:], components[1])

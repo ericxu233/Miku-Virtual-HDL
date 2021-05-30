@@ -7,12 +7,9 @@ from logic_gate import trace_output
 def main():
     parser()
 
-    print(outputs)
-    print(all_gates)
-
     for x in outputs:
-        value = trace_output(x)
-        print("Gate " + x + " has an ouput value of " + value + ".")
+        value = trace_output(x)*1
+        print("Gate " + str(x) + " has an ouput value of " + str(value) + ".")
     
     print("Finish;")
 

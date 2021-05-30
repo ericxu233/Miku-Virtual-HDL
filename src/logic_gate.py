@@ -26,12 +26,10 @@ class logicGate:
 
     #verify if all wires have produced an output
     def verify_complete(self):
-        complete = not self.connection_wires
-        return complete
+        return len(self.connection_wires) == len(self.complete_connections)
     
     #complete a wire connection, note: does not handle the inputed signal (will be handled by trace_output())
     def wire_complete(self, wire):
-        self.connection_wires.remove(wire)
         self.complete_connections.insert(len(self.complete_connections), wire)
     
 
@@ -44,9 +42,9 @@ class orGate(logicGate):
         logicGate.__init__(self, typev, name)
 
     def compute_result(self):
-        output = False
+        self.output = False
         for x in self.input:
-            output = output or x
+            self.output = self.output or x
 
 
     
@@ -55,9 +53,9 @@ class andGate(logicGate):
         logicGate.__init__(self, typev, name)
 
     def compute_result(self):
-        output = True
+        self.output = True
         for x in self.input:
-            output = output and x
+            self.output = self.output and x
 
 
 class notGate(logicGate):
@@ -65,7 +63,7 @@ class notGate(logicGate):
         logicGate.__init__(self, typev, name)
 
     def compute_result(self):
-        output = not self.input[0]
+        self.output = not self.input[0]
 
 
 class norGate(logicGate):
@@ -73,10 +71,10 @@ class norGate(logicGate):
         logicGate.__init__(self, typev, name)
 
     def compute_result(self):
-        output = False
+        self.output = False
         for x in self.input:
-            output = output or x
-        output = not output
+            self.output = self.output or x
+        self.output = not self.output
 
 
 class nandGate(logicGate):
@@ -84,10 +82,10 @@ class nandGate(logicGate):
         logicGate.__init__(self, typev, name)
 
     def compute_result(self):
-        output = True
+        self.output = True
         for x in self.input:
-            output = output and x
-        output = not output
+            self.output = self.output and x
+        self.output = not self.output
 
 
 class xorGate(logicGate):
@@ -95,13 +93,13 @@ class xorGate(logicGate):
         logicGate.__init__(self, typev, name)
 
     def compute_result(self):
-        output = False
+        self.output = False
         counter = 0
         for x in self.input:
             if x == 1:
                 counter += 1
         if counter%2 == 1:
-            output = True
+            self.output = True
 
 
 class xnorGate(logicGate):
@@ -109,19 +107,20 @@ class xnorGate(logicGate):
         logicGate.__init__(self, typev, name)
     
     def compute_result(self):
-        output = False
+        self.output = False
         counter = 0
         for x in self.input:
             if x == 0:
                 counter += 1
         if counter%2 == 0:
-            output = True
+            self.output = True
  
 #fuction that produces the circuite ouput with recusion
 def trace_output(gate_name):
     #print(gate_name)
 
     gate = all_gates[gate_name]
+
 
     #first verify if logic gate is already complete
     if gate.verify_complete():
@@ -132,6 +131,7 @@ def trace_output(gate_name):
     for x in gate.connection_wires:
         gate.add_input(trace_output(x))
         gate.wire_complete(x)
+
     
     #return and error handling
     if gate.verify_complete():
