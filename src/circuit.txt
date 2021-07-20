@@ -1,0 +1,5 @@
+mand	g1 (g2, g3)
+mnot	g3 (1)
+morr	g2 (1, 0)
+
+output	g1		

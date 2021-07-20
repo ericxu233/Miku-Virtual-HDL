@@ -64,7 +64,8 @@ def insert_co(identifier):
 
 
 def parser():
-    file = open("user_script/circuit.txt", "r")
+    filename = sys.argv[-1]
+    file = open(filename, "r")
     lines = file.readlines()
     counter = 0
 

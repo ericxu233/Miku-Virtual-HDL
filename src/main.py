@@ -5,7 +5,7 @@ from logic_gate import trace_output
 
 
 def main():
-    parser()
+    parser() 
 
     for x in outputs:
         value = trace_output(x)*1
